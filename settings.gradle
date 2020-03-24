@@ -1,0 +1,3 @@
+rootProject.name='JsonDataClass'
+include ':app'
+include ':jsondataclassmodule'
