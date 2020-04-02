@@ -9,8 +9,7 @@ import java.lang.reflect.Type
  * All sub classes must be data classes!
  */
 open class JsonDataClass {
-
-    open fun toJsonString(adapters: Array<out AdapterDefinition>? = adapterDefinitions): String {
+    fun toJsonString(adapters: Array<out AdapterDefinition>? = adapterDefinitions): String {
         return buildMoshi(adapters).adapter(this.javaClass).toJson(this)
     }
 
