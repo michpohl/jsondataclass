@@ -1,5 +1,5 @@
 ##### JsonDataClass
-For those who need to transfer data classes to *JSON* and from *JSON* often, this little helper aims to make life a little easier. It uses [Moshi](https://github.com/square/moshi) undd´er the hood.
+For those who need to transfer data classes to *JSON* and from *JSON* often, this little helper aims to make life a little easier. It uses [Moshi](https://github.com/square/moshi) under the hood.
 
 Every data class that extends **JsonDataClass** gains a *toJsonString()* method that simply works and returns a JSON string. 
 
