@@ -10,8 +10,23 @@ And if your data classes are more complex, you can add custom *JsonAdapters* to 
 This little library has been developed for **Android** projects - it might also work elsewhere as it is not dependent on anything specific to **Android**,
 but this is untested.
 
+#### Installation
 
+If you haven't add jitpack to your project's *build.gradle*:
 
+    allprojects {
+        repositories {
+      
+            // add this line   
+            maven { url 'https://jitpack.io' }
+    }
+}
+
+Then add the dependency to your app's *build.gradle* file:
+
+    implementation 'com.github.michpohl:jsondataclass:[version]'
+
+The current latest available version is: **0.6**
 #### Usage:
 
 Just have your data classes extend *JsonDataClass* like the two in this example:
