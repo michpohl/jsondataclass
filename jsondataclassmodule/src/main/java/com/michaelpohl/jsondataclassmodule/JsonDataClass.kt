@@ -2,10 +2,8 @@ package com.michaelpohl.jsondataclassmodule
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
-import java.util.*
 
 /**
  * All sub classes must be data classes!
