@@ -12,7 +12,7 @@ but this is untested.
 
 #### Installation
 
-If you haven't add jitpack to your project's *build.gradle*:
+If you haven't, add jitpack to your project's *build.gradle*:
 
     allprojects {
         repositories {
@@ -27,6 +27,9 @@ Then add the dependency to your app's *build.gradle* file:
     implementation 'com.github.michpohl:jsondataclass:[version]'
 
 The current latest available version is: **0.6**
+
+If you want, you can of course clone this repo and reference it in your gradle files directly.
+
 #### Usage:
 
 Just have your data classes extend *JsonDataClass* like the two in this example:
