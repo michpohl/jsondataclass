@@ -72,7 +72,7 @@ If your data class contains more complex types, you might have to deal with *Jso
         val date: Date
     ) : JsonDataClass()
 
-For this case, **JsonDataClass** uses *AdapterDefinitions*,m which just hold a type and the correspondant *JsonAdapter*. This can be a custom adapter you provide or one that is already integrated in *Moshi*.
+For this case, **JsonDataClass** uses *AdapterDefinitions*, which just hold a type and the correspondent *JsonAdapter*. This can be a custom adapter you provide or one that is already integrated in *Moshi*.
 
     val dataClass = MyDataDate(Date())
     
