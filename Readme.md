@@ -26,7 +26,7 @@ Then add the dependency to your app's *build.gradle* file:
 
     implementation 'com.github.michpohl:jsondataclass:[version]'
 
-The current latest available version is: **0.6**
+The current latest available version is: **0.71**
 
 If you want, you can of course clone this repo and reference it in your gradle files directly.
 
@@ -65,6 +65,12 @@ Now , if you have a data class of type *MyDataClass*, you can do:
 And if you want it back as a data class, this is how:
 
     val dataClass2 = JsonDataClass.fromJsonString<MyDataClass>(string)
+
+**New! You can now also get lists of objects back by using:**
+
+    JsonDataClass.listFromJsonString<MyDataClass>(string) 
+
+Note that this expects a JsonArray as input!
 
 If your data class contains more complex types, you might have to deal with *JsonAdapters*:
 

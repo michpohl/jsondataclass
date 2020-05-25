@@ -55,7 +55,6 @@ open class JsonDataClass {
         }
 
         inline fun parseJsonList(string: String): List<String?> {
-            var string2 = ""
             if (!string.startsWith("[")) return listOf()
 
             var bracketCount = 0
@@ -65,14 +64,14 @@ open class JsonDataClass {
 
             string.asSequence().forEach {
                 if (it.toString() == "{") {
-                    if (bracketCount == 0) start = string2.indexOf(it)
+                    if (bracketCount == 0) start = string.indexOf(it)
                     bracketCount += 1
                 }
                 if (it.toString() == "}") {
                     bracketCount -= 1
                     if (bracketCount == 0) {
-                        end = string2.indexOf(it)
-                        substrings.add(string2.subSequence(start, end + 1).toString())
+                        end = string.indexOf(it)
+                        substrings.add(string.subSequence(start, end + 1).toString())
                     }
                 }
             }
@@ -85,18 +84,18 @@ typealias AdapterDefinition = Pair<Type, JsonAdapter<*>>
 
 // a tiny main() function for testing
 
-//fun main() {
-//    val testString =
-//        "[{\"placeId\":\"here:2768lxx5-89caf332709a0d0a2afe8704a5fa954a\",\"category\":\"point-of-interest\",\"label\":\"Haus des Rundfunks\",\"subLabel\":\"Masurenallee, Westend, 14057 Berlin\"},{\"placeId\":\"here:276q9wpy-74b80732a276070d3f2bae2f0521e26e\",\"category\":\"station\",\"label\":\"Haus des Rundfunks\",\"subLabel\":\"Masurenallee, Westend, 14057 Berlin\"}]"
-//    val result = JsonDataClass.fromJsonStringAsList<PlaceSuggestion>(testString)
-//    print(result)
-//}
-//
-//data class PlaceSuggestion(
-//    val category: String,
-//    val id: String,
-//    val label: String,
-//    val sublabel: String
-//) : JsonDataClass()
+fun main() {
+    val testString =
+        "[{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW1tYXJ1bTtsYW5nPW5sO2xhdD01My4yMzY0MTtsb249NS41NDI1NTtjaXR5PVR6dW1tYXJ1bTtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzummarum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW07bGFuZz1ubDtsYXQ9NTMuMTU4NzY7bG9uPTUuNTYyNzE7Y2l0eT1UenVtO3Bvc3RhbENvZGU9ODgwNDtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dWNhY2FiO2xhbmc9ZXM7bGF0PTIwLjA3MTg3O2xvbj0tODkuMDUwMTU7Y2l0eT1UenVjYWNhYjtjb3VudHJ5PU1FWDtzdGF0ZT1ZdWNhdGFuO3N0YXRlQ29kZT1ZVUM7Y2F0ZWdvcnlJZD1jaXR5LXRvd24tdmlsbGFnZTtzb3VyY2VTeXN0ZW09aW50ZXJuYWw7cGRzQ2F0ZWdvcnlJZD05MDAtOTEwMC0wMDAw\",\"category\":\"point-of-interest\",\"label\":\"Tzucacab\",\"subLabel\":\"Yucatan, Mexiko\"},{\"placeId\":\"here:276u1huu-9f3fee0155ef456d906844ad62c62a18\",\"category\":\"station\",\"label\":\"Tzu\",\"subLabel\":\"Mülheimer Straße, Alt-Oberhausen, 46049 Oberhausen\"},{\"placeId\":\"here:100z7fbz-76e0eced2fae022d7904ef13473c598e\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Bulevard Knyaginya Maria Luiza, 1000 Sofia, Bulgarien\"}]"
+    val result = JsonDataClass.listFromJsonString<PlaceSuggestion>(testString)
+    print(result)
+}
+
+data class PlaceSuggestion(
+    val category: String,
+    val id: String,
+    val label: String,
+    val sublabel: String
+) : JsonDataClass()
 
 
