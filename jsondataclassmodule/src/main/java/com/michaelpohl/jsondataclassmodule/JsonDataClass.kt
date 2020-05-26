@@ -27,14 +27,13 @@ open class JsonDataClass {
         inline fun <reified T : JsonDataClass> listFromJsonString(
             string: String,
             vararg adapters: AdapterDefinition
-        ): List<T?> {
+        ): List<T> {
             val resultList = mutableListOf<T>()
             val stringList = parseJsonList(string)
             val moshi = buildMoshi(adapters).adapter(T::class.java)
             stringList.forEach {
-
-                moshi.fromJson(it)?.let { t ->
-                    resultList.add(t)
+                it?.let {
+                    moshi.fromJson(it)?.let { t -> resultList.add(t) }
                 }
             }
             return resultList
@@ -84,18 +83,18 @@ typealias AdapterDefinition = Pair<Type, JsonAdapter<*>>
 
 // a tiny main() function for testing
 
-fun main() {
-    val testString =
-        "[{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW1tYXJ1bTtsYW5nPW5sO2xhdD01My4yMzY0MTtsb249NS41NDI1NTtjaXR5PVR6dW1tYXJ1bTtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzummarum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW07bGFuZz1ubDtsYXQ9NTMuMTU4NzY7bG9uPTUuNTYyNzE7Y2l0eT1UenVtO3Bvc3RhbENvZGU9ODgwNDtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dWNhY2FiO2xhbmc9ZXM7bGF0PTIwLjA3MTg3O2xvbj0tODkuMDUwMTU7Y2l0eT1UenVjYWNhYjtjb3VudHJ5PU1FWDtzdGF0ZT1ZdWNhdGFuO3N0YXRlQ29kZT1ZVUM7Y2F0ZWdvcnlJZD1jaXR5LXRvd24tdmlsbGFnZTtzb3VyY2VTeXN0ZW09aW50ZXJuYWw7cGRzQ2F0ZWdvcnlJZD05MDAtOTEwMC0wMDAw\",\"category\":\"point-of-interest\",\"label\":\"Tzucacab\",\"subLabel\":\"Yucatan, Mexiko\"},{\"placeId\":\"here:276u1huu-9f3fee0155ef456d906844ad62c62a18\",\"category\":\"station\",\"label\":\"Tzu\",\"subLabel\":\"Mülheimer Straße, Alt-Oberhausen, 46049 Oberhausen\"},{\"placeId\":\"here:100z7fbz-76e0eced2fae022d7904ef13473c598e\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Bulevard Knyaginya Maria Luiza, 1000 Sofia, Bulgarien\"}]"
-    val result = JsonDataClass.listFromJsonString<PlaceSuggestion>(testString)
-    print(result)
-}
-
-data class PlaceSuggestion(
-    val category: String,
-    val id: String,
-    val label: String,
-    val sublabel: String
-) : JsonDataClass()
+//fun main() {
+//    val testString =
+//        "[{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW1tYXJ1bTtsYW5nPW5sO2xhdD01My4yMzY0MTtsb249NS41NDI1NTtjaXR5PVR6dW1tYXJ1bTtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzummarum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dW07bGFuZz1ubDtsYXQ9NTMuMTU4NzY7bG9uPTUuNTYyNzE7Y2l0eT1UenVtO3Bvc3RhbENvZGU9ODgwNDtjb3VudHJ5PU5MRDtzdGF0ZT1Gcmllc2xhbmQ7Y291bnR5PVdhYWRob2VrZTtjYXRlZ29yeUlkPWNpdHktdG93bi12aWxsYWdlO3NvdXJjZVN5c3RlbT1pbnRlcm5hbDtwZHNDYXRlZ29yeUlkPTkwMC05MTAwLTAwMDA\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Waadhoeke, Friesland, Niederlande\"},{\"placeId\":\"here:loc-dmVyc2lvbj0xO3RpdGxlPVR6dWNhY2FiO2xhbmc9ZXM7bGF0PTIwLjA3MTg3O2xvbj0tODkuMDUwMTU7Y2l0eT1UenVjYWNhYjtjb3VudHJ5PU1FWDtzdGF0ZT1ZdWNhdGFuO3N0YXRlQ29kZT1ZVUM7Y2F0ZWdvcnlJZD1jaXR5LXRvd24tdmlsbGFnZTtzb3VyY2VTeXN0ZW09aW50ZXJuYWw7cGRzQ2F0ZWdvcnlJZD05MDAtOTEwMC0wMDAw\",\"category\":\"point-of-interest\",\"label\":\"Tzucacab\",\"subLabel\":\"Yucatan, Mexiko\"},{\"placeId\":\"here:276u1huu-9f3fee0155ef456d906844ad62c62a18\",\"category\":\"station\",\"label\":\"Tzu\",\"subLabel\":\"Mülheimer Straße, Alt-Oberhausen, 46049 Oberhausen\"},{\"placeId\":\"here:100z7fbz-76e0eced2fae022d7904ef13473c598e\",\"category\":\"point-of-interest\",\"label\":\"Tzum\",\"subLabel\":\"Bulevard Knyaginya Maria Luiza, 1000 Sofia, Bulgarien\"}]"
+//    val result = JsonDataClass.listFromJsonString<PlaceSuggestion>(testString)
+//    print(result)
+//}
+//
+//data class PlaceSuggestion(
+//    val category: String,
+//    val id: String,
+//    val label: String,
+//    val sublabel: String
+//) : JsonDataClass()
 
 
