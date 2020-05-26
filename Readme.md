@@ -26,7 +26,7 @@ Then add the dependency to your app's *build.gradle* file:
 
     implementation 'com.github.michpohl:jsondataclass:[version]'
 
-The current latest available version is: **0.71**
+The current latest available version is: **0.7.2**
 
 If you want, you can of course clone this repo and reference it in your gradle files directly.
 
